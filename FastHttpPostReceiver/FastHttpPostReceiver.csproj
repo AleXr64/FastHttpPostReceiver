@@ -5,6 +5,14 @@
     <AssemblyName>FastHttpPostReceiver</AssemblyName>
     <RootNamespace>AleXr64.FastHttpPostReceiver</RootNamespace>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>AleXr64.FastHttpPostReceiver</PackageId>
+    <Authors>AleXr64</Authors>
+    <Company>AleXr64</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>AleXr64</Copyright>
+    <PackageProjectUrl>https://github.com/AleXr64/FastHttpPostReceiver</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AleXr64/FastHttpPostReceiver</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
   </PropertyGroup>
 
 </Project>
