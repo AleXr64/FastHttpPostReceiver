@@ -17,16 +17,22 @@ namespace AleXr64.FastHttpPostReceiver
         private const string __response = "HTTP/1.0 200 OK\r\n\r\n";
         private static readonly byte[] __responseBytes = Encoding.ASCII.GetBytes(__response);
         private readonly Thread _listenerThread;
-        private readonly short _port;
-        private readonly Socket _serverSocket;
+        private readonly Socket _serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        private readonly IPEndPoint endPoint;
         private readonly object locker = new object();
         private bool __exitFlag;
 
-        public HttpPostListener(short port)
+        public HttpPostListener(ushort port)
         {
-            _port = port;
             _listenerThread = new Thread(ListenerLoop) { Name = "HttpPostListener" };
-            _serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            endPoint = new IPEndPoint(IPAddress.Loopback, port);
+        }
+
+        public HttpPostListener(string host, ushort port)
+        {
+            _listenerThread = new Thread(ListenerLoop) { Name = "HttpPostListener" };
+            var addresses = Dns.GetHostAddresses(host);
+            endPoint = addresses.Length > 1 ? new IPEndPoint(IPAddress.Any, port) : new IPEndPoint(addresses[0], port);
         }
 
         public event HttpPostReceiver OnDataReceived;
@@ -130,17 +136,9 @@ namespace AleXr64.FastHttpPostReceiver
 
         public void Start()
         {
-            var endpoint = new IPEndPoint(IPAddress.Loopback, _port);
-            try
-            {
-                _serverSocket.Bind(endpoint);
-                _serverSocket.Listen(100);
-                _listenerThread.Start();
-            } catch(Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            _serverSocket.Bind(endPoint);
+            _serverSocket.Listen(100);
+            _listenerThread.Start();
         }
 
         public void Stop()
