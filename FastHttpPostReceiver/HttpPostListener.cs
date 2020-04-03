@@ -103,7 +103,7 @@ namespace AleXr64.FastHttpPostReceiver
                 byte[] messageBytes = null;
 
                 var contentLength = headers.FirstOrDefault(x => x.Name == "Content-Length");
-                if(!stream.EndOfStream && contentLength.Name == "Content-Length")
+                if(!stream.EndOfStream && contentLength.Name != null)
                 {
                     if(int.TryParse(contentLength.Value, out var contentBytesCount))
                     {
