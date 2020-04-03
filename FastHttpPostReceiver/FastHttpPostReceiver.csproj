@@ -13,6 +13,7 @@
     <PackageProjectUrl>https://github.com/AleXr64/FastHttpPostReceiver</PackageProjectUrl>
     <RepositoryUrl>https://github.com/AleXr64/FastHttpPostReceiver</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
+    <Description>Fast HTTP POST-only receive-only server written specially for AleXr64.BotFramework</Description>
   </PropertyGroup>
 
   <ItemGroup>
